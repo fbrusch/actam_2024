@@ -43,12 +43,8 @@ style: |
 - This role potentially replaceable by LLMs in the future
 
 <div class="custom-centered">
+![](assets/2024-09-16-10-51-03.png)
 </div>
-
-  ![](assets/2024-09-16-10-51-03.png)
-
-</div>
-<div>  
 
 
 ---

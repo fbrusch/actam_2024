@@ -1,31 +1,31 @@
-name: Marp to GitHub Pages
+name: "Marp to GitHub Pages"
 
-   on:
-     push:
-       branches: [ main ]  # Assicurati che questo corrisponda al tuo branch principale
+on:
+  push:
+    branches: [ main ]  # Assicurati che questo corrisponda al tuo branch principale
 
-   jobs:
-     build:
-       runs-on: ubuntu-latest
-       steps:
-       - uses: actions/checkout@v2
-       
-       - name: Use Node.js
-         uses: actions/setup-node@v2
-         with:
-           node-version: '14'
-       
-       - name: Install Marp CLI
-         run: npm install -g @marp-team/marp-cli
-       
-       - name: Convert Markdown to HTML
-         run: |
-           marp introduction.md -o index.html
-           # Se hai altri file Markdown, aggiungili qui
-           # marp altro-file.md -o altro-file.html
-       
-       - name: Deploy to GitHub Pages
-         uses: peaceiris/actions-gh-pages@v3
-         with:
-           github_token: ${{ secrets.GITHUB_TOKEN }}
-           publish_dir: .
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Use Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+    
+    - name: Install Marp CLI
+      run: npm install -g @marp-team/marp-cli
+    
+    - name: Convert Markdown to HTML
+      run: |
+        marp introduction.md -o index.html
+        # Se hai altri file Markdown, aggiungili qui
+        # marp altro-file.md -o altro-file.html
+    
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: .

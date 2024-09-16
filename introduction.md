@@ -43,8 +43,14 @@ style: |
 - This role potentially replaceable by LLMs in the future
 
 <div class="custom-centered">
-  <img src="assets/2024-09-16-10-51-03.png" alt="" />
 </div>
+
+  ![](assets/2024-09-16-10-51-03.png)
+
+</div>
+<div>  
+
+
 ---
 
 ## Beyond Traditional Programming

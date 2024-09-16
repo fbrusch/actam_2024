@@ -36,7 +36,7 @@ paginate: true
 - This role potentially replaceable by LLMs in the future
 
 <div style="text-align: center;">
-  ![Alt text](assets/2024-09-16-10-51-03.png){ width=50% }
+  <img src="assets/2024-09-16-10-51-03.png" alt="Traditional view of programming" style="width: 50%;" />
 </div>
 ---
 

@@ -2,13 +2,6 @@
 marp: true
 theme: default
 paginate: true
-style: |
-  .custom-centered {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%; /* Adjust as needed */
-  }
 ---
 
 # Advanced Coding Tools and Methodologies (ACTAM)
@@ -42,13 +35,7 @@ style: |
 - Captured in software engineering by the waterfall model
 - This role potentially replaceable by LLMs in the future
 
-
----
-
-![](assets/2024-09-16-10-51-03.png)
-<div class="custom-centered">
-</div>
-
+![width:50px](assets/2024-09-16-10-51-03.png)
 
 ---
 

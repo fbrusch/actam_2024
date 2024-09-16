@@ -62,7 +62,7 @@ paginate: true
 
 - Chosen to anchor and orient the vast horizon of applications
 - Will discuss musical applications, live coding, programming physical control devices
-- Example of unusual use in music: [YouTube video link]
+- Example of unusual use in music: https://www.youtube.com/watch?v=yY1FSsUV-8c
 
 ---
 

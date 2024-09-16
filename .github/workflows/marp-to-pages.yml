@@ -3,7 +3,8 @@ name: "Marp to GitHub Pages"
 on:
   push:
     branches: [ main ]  # Assicurati che questo corrisponda al tuo branch principale
-
+permissions:
+  contents: write
 jobs:
   build:
     runs-on: ubuntu-latest

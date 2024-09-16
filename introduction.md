@@ -42,6 +42,9 @@ style: |
 - Captured in software engineering by the waterfall model
 - This role potentially replaceable by LLMs in the future
 
+
+---
+
 ![](assets/2024-09-16-10-51-03.png)
 <div class="custom-centered">
 </div>

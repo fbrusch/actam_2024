@@ -35,7 +35,9 @@ paginate: true
 - Captured in software engineering by the waterfall model
 - This role potentially replaceable by LLMs in the future
 
-<img src="assets/2024-09-16-10-51-03.png" alt="" style="display: block; margin-left: auto; margin-right: auto; width: 50%;" />
+<div style="text-align: center;">
+  ![Alt text](assets/2024-09-16-10-51-03.png){ width=50% }
+</div>
 ---
 
 ## Beyond Traditional Programming

@@ -3,7 +3,7 @@ marp: true
 theme: default
 paginate: true
 style: |
-  img.custom-centered {
+  .custom-centered {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -42,8 +42,9 @@ style: |
 - Captured in software engineering by the waterfall model
 - This role potentially replaceable by LLMs in the future
 
-<img src="assets/2024-09-16-10-51-03.png" alt="" class="custom-centered" />
-
+<div class="custom-centered">
+  <img src="assets/2024-09-16-10-51-03.png" alt="" />
+</div>
 ---
 
 ## Beyond Traditional Programming

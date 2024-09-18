@@ -63,7 +63,7 @@ _Explore **more** at_ [Markdown Live Preview](https://markdownlivepreview.com/).
 
 ## Types of version control
 
-- ###Local
+### Local
 - based on a simple database that kept track of all the changes in the files
 - No collaboration: Bad
 

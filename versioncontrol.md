@@ -77,6 +77,10 @@ _Explore **more** at_ [Markdown Live Preview](https://markdownlivepreview.com/).
 
 ---
 
+![](assets/distributed.png)
+
+---
+
 ## Fetching vs Pulling
 
 - Fetch: retrieves updates from a remote repo **without altering the local working directory**

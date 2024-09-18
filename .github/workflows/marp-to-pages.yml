@@ -22,9 +22,11 @@ jobs:
     - name: Convert Markdown to HTML
       run: |
         ls -la  # Lista i file nella directory
-        cat introduction.md  # Mostra il contenuto del file
+        cat introduction.md  # Mostra il contenuto del file introduction.md
+        cat versioncontrol.md  
         marp --version  # Mostra la versione di Marp
-        marp introduction.md -o index.html --verbose  # Usa l'opzione verbose
+        marp introduction.md -o index.html --verbose  
+        marp versioncontrol.md -o versioncontrol.html --verbose  
         
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3

@@ -106,20 +106,15 @@ _Explore **more** at_ [Markdown Live Preview](https://markdownlivepreview.com/).
 
 ## Many Git powers to achieve magic goals
 
-- ### start a working area
-*git add* | *git clone*
+- **start a working area:** *git add* | *git clone*
 
-- ### mess around
-*git add* | *git mv* | *git rm*
+- **mess around:** *git add* | *git mv* | *git rm*
 
-- ### examine history and state
-*git status* | *git log* | *git diff*
+- **examine history and state:** *git status* | *git log* | *git diff*
 
-- ### modify common history
-*git commit* | *git branch* | *git merge*
+- **make and modify history:** *git commit* | *git branch* | *git merge*
 
-- ### collaborate
-*git fetch* | *git pull* | *git push*
+- **collaborate:** *git fetch* | *git pull* | *git push*
 
 ---
 
@@ -143,6 +138,7 @@ Almost synonim across github and gitlab.
 
 **A PR is a proposal to merge a set of changes from one branch into another, reviewed by team members**
 
+---
 
 ## Resources
 
@@ -151,3 +147,5 @@ Dowload Git https://git-scm.com/download
 What is a pull request: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests
 
 For VSC lovers: https://code.visualstudio.com/docs/sourcecontrol/overview
+
+---

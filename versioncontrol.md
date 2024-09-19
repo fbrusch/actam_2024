@@ -29,7 +29,7 @@ paginate: true
 - All backgrounds are welcomed! (mine too)
 - Collaborative approach
 - Having fun == Learning
-- Questions shall be asked (llms)  
+- Questions shall be asked (llms and/or me)  
 
 ---
 
@@ -140,12 +140,60 @@ Almost synonim across github and gitlab.
 
 ---
 
+## Memo 4:
+![](assets/cloneVSfork.png)
+
+---
+
+## Memo 5: Tweak history
+
+- *git checkout HEAD~3*: Temporarily go back **without removing the latest commits** ("detached HEAD")
+- *git reset --soft HEAD~3*: Permanently **reset the branch** to a previous commit (and keep changes staged)
+- *git checkout -b new-branch HEAD~3*: Creating a new branch from a previous commit **preserving current branch**
+
+---
+
 ## Resources
 
-Dowload Git https://git-scm.com/download
+- Dowload Git https://git-scm.com/download
 
-What is a pull request: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests
+- What is a pull request: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests
 
-For VSC lovers: https://code.visualstudio.com/docs/sourcecontrol/overview
+- For VSC lovers: https://code.visualstudio.com/docs/sourcecontrol/overview
+
+---
+
+## Hands-on 1: Play with GitHub
+
+1) Create GitHub account
+2) Populate a new repo with files/folders
+3) Create new branch, commit some changes, inspect history
+4) Pull requests and merge without conflicts
+5) like before but with conflicts resolution
+
+6) Extra: fork your deskmate's...repo!
+
+---
+
+## Hands-on 2: Solo local repo
+
+1) Install Git
+2) Create and initialize a local repo
+3) Add and commit stuff
+4) Tweak common history (3 methods above)
+
+5) Extra: try merge changes from new-branch into main (*git merge new-branch*)
+
+---
+
+## Hands-on 3: Collab on a remote repository
+
+1) Group in 2-4 people 
+2) Imagine a mockup project (app, library, book)
+3) Assign tasks (devs, maintainers)
+4) Create and clone remote repo 
+5) Pull and Push to branches (2-3 iterations)
+6) Create and review pull requests for merging changes
+7) Final goal: a clean, functional main branch
 
 ---

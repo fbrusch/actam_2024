@@ -106,7 +106,7 @@ _Explore **more** at_ [Markdown Live Preview](https://markdownlivepreview.com/).
 
 ## Many Git powers to achieve magic goals
 
-- **start a working area:** *git add* | *git clone*
+- **start a working area:** *git init* | *git clone*
 
 - **mess around:** *git add* | *git mv* | *git rm*
 

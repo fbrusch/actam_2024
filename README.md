@@ -4,4 +4,4 @@
 
 [version control](https://raw.githack.com/fbrusch/actam_2024/gh-pages/versioncontrol.html) -> [link alla registrazione](https://politecnicomilano.webex.com/webappng/sites/politecnicomilano/recording/f1e75223f1204cb5a233bf605bc401de/playback)
 
-[build and deploy html](https://raw.githack.com/fbrusch/actam_2024/gh-pages/firstwebpage.html)
+[HTML deployment](https://raw.githack.com/fbrusch/actam_2024/gh-pages/firstwebpage.html)

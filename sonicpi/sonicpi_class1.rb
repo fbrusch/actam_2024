@@ -4,7 +4,6 @@
 
 # definition of functions to capture sections and play with them
 
-
 def fm1
   [60, 62, 64, 60].each do |nota|
     # a block of instructions

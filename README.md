@@ -8,4 +8,4 @@
 
 [Fra Martinos](https://five-cub.surge.sh/)
 
-[hackathon preparation](https://raw.githack.com/fbrusch/actam_2024/main/train4hackaton.html)
+[hackathon preparation](https://raw.githack.com/fbrusch/actam_2024/gh-pages/train4hackaton.html)

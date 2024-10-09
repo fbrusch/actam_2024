@@ -7,3 +7,5 @@
 [build and deploy html](https://raw.githack.com/fbrusch/actam_2024/gh-pages/firstwebpage.html) -> [link alla registrazione](https://politecnicomilano.webex.com/webappng/sites/politecnicomilano/recording/8ea246b7527042ca8c87ed0870c9021d/playback)
 
 [Fra Martinos](https://five-cub.surge.sh/)
+
+[hackathon preparation](https://raw.githack.com/fbrusch/actam_2024/gh-pages/train4hackaton.html)

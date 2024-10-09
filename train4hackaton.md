@@ -30,7 +30,7 @@ You will be given an existing track or a musical idea that we suggest (earn up t
 
 With either option, you will be asked to complete the other one at home and send us either the codebase or a screen capture of your performance.
 
---
+---
 
 ## Things to consider
 
@@ -39,7 +39,7 @@ With either option, you will be asked to complete the other one at home and send
 - you can prepare a mental structure of your performance (no improvisation skills needed)
 - if you can't attend the hackathon don't worry, you can send us a screencapture of your performance.
 
---
+---
 
 ## Evaluation criteria
 
@@ -47,4 +47,4 @@ With either option, you will be asked to complete the other one at home and send
 - Code structure (e.g. modularization, reusability of components) based on the music idea.
 - Performance smoothness (no skipping, no stopping, etc.)
 
---
+---

@@ -28,6 +28,7 @@ jobs:
         marp introduction.md -o index.html --verbose  
         marp versioncontrol.md -o versioncontrol.html --verbose 
         marp firstwebpage.md -o firstwebpage.html --verbose   
+        marp train4hackaton.md -o train4hackaton.html --verbose   
         
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3

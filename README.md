@@ -9,3 +9,6 @@
 [Fra Martinos](https://five-cub.surge.sh/)
 
 [hackathon preparation](https://raw.githack.com/fbrusch/actam_2024/gh-pages/train4hackaton.html)
+
+[hackathon submissions](https://docs.google.com/forms/d/e/1FAIpQLSdWhDsmBtv-GkAGvuemqakQWd9mpwFhc7kdNEuE-aJfKGmmwA/viewform?usp=sf_link)
+

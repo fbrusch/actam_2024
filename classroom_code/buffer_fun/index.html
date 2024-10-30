@@ -1,21 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<script src="index.js">c</script>
-
+    <script src="index.js"></script>
 </head>
 <style>
-    div {margin: 20px};
+    div { margin: 20px; }
 </style>
 <body>
     <h1>Welcome to my super application!</h1>
     <div>
-        <!--input id="frequencyInput" type="range" min="10" 
-            max = "1000" step="1" value="440"-->
-
-        <button onclick="playBuffer(createsASineBuffer(440))">Play some 440hz sine wave!</button>
-        <button onclick="playBuffer(createsASineBuffer(550))">Play some 550hz sine wave!</button>
+        <button onclick="playBuffer(createBuffer(440, countSine))">Play a 440 Hz sine wave!</button>
+        <button onclick="playBuffer(createBuffer(550, countSine))">Play a 550 Hz sine wave!</button>
     </div>
     <div>
-        <button onclick="playBuffer(createsANoiseBuffer)">Play some noise!</button>
+        <button onclick="playBuffer(createBuffer(0, countNoize))">Play some noise!</button>
     </div>
     <button onclick="stop()">Stop!</button>
 </body>
+</html>

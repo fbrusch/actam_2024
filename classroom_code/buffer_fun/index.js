@@ -1,9 +1,14 @@
 
 const c = new AudioContext();
 
+
+function createABuffer() {
+    return  c.createBuffer(1, c.sampleRate * 2, c.sampleRate);
+}
+
 function createsANoiseBuffer() {
-    const b = c.createBuffer(1, c.sampleRate * 2, 
-    c.sampleRate);
+
+    const b = createABuffer();
 
     const audioData = b.getChannelData(0);
 
@@ -15,11 +20,11 @@ function createsANoiseBuffer() {
 
 function createsASineBuffer(f) {
         return function() {
-        const b = c.createBuffer(1, c.sampleRate * 2, 
-        c.sampleRate);
 
+        const b = createABuffer();
         
         alpha = Math.PI*2*f/c.sampleRate;
+
         const audioData = b.getChannelData(0);
 
         for(var i=0; i<audioData.length; i++) {

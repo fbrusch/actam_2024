@@ -13,16 +13,20 @@ function createsANoiseBuffer() {
     return b;
 }
 
-function createsASineBuffer() {
-    const b = c.createBuffer(1, c.sampleRate * 2, 
-    c.sampleRate);
+function createsASineBuffer(f) {
+        return function() {
+        const b = c.createBuffer(1, c.sampleRate * 2, 
+        c.sampleRate);
 
-    const audioData = b.getChannelData(0);
+        
+        alpha = Math.PI*2*f/c.sampleRate;
+        const audioData = b.getChannelData(0);
 
-    for(var i=0; i<audioData.length; i++) {
-        audioData[i] = Math.sin(i/10);   
+        for(var i=0; i<audioData.length; i++) {
+            audioData[i] = Math.sin(alpha*i);   
+        }
+        return b;
     }
-    return b;
 }
 
 

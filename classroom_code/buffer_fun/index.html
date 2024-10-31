@@ -3,19 +3,18 @@
 
 </head>
 <style>
-    div {margin: 20px};
+    div {margin-top: 20px};
 </style>
+
+
 <body>
     <h1>Welcome to my super application!</h1>
     <div>
-        <!--input id="frequencyInput" type="range" min="10" 
-            max = "1000" step="1" value="440"-->
+        <button onclick="createsASineBuffer(f)">Play sine wave!</button>
+      <input type ="text" id = "f" min="20" max="20000" step="10" oninput="f = Number(this.value)">  f </input>
 
-        <button onclick="playBuffer(createsASineBuffer(440))">Play some 440hz sine wave!</button>
-        <button onclick="playBuffer(createsASineBuffer(550))">Play some 550hz sine wave!</button>
-    </div>
     <div>
-        <button onclick="playBuffer(createsANoiseBuffer)">Play some noise!</button>
+        <button onclick="createsANoiseBuffer()">Play some noise!</button>
     </div>
     <button onclick="stop()">Stop!</button>
 </body>

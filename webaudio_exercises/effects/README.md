@@ -16,4 +16,4 @@ Make a new directory with your name like in the example folder my_name.
 
 - same as for audio synthesis exercise
 - for a reverb effect, fill a buffer with randomized values that decay over time and then set it to the convolver node buffer
-- use event listeners to update the effect values 
+- use event listeners to update the effect values like `.addEventListener('input', () => {...}`

@@ -4,4 +4,5 @@ You can use codespaces after forking this repo branch. Then make a pull requests
 
 ### web audio api
 
-Ideally, you would complete the exercises in this order: audio synthesis, routing, effects, analysis.
+Check specific instructions in each subfolder.
+Ideally, you would complete the exercises in this order: audio [synthesis](webaudio_exercises/synthesis), [routing](webaudio_exercises/routing), [effects](webaudio_exercises/effects), [analysis](webaudio_exercises/analysis).

@@ -1,6 +1,6 @@
 # Actam exercises 
 
-You can use codespaces after forking this repo branch. Then make a pull requests to the original repo.
+You can use github codespaces after forking this repo branch. Then make a pull requests to the original repo.
 
 ### web audio api
 

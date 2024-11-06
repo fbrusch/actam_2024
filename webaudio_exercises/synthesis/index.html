@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Audio Synthesis</title>
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        button {
+            margin: 5px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="section">
+            <h2>Oscillator Example</h2>
+            <button id="startOsc">Start Oscillator</button>
+            <button id="stopOsc">Stop Oscillator</button>
+            <br>
+            <label>Frequency: </label>
+            <input type="range" id="freqControl" min="20" max="2000" value="440">
+            <span id="freqDisplay">440 Hz</span>
+            <br>
+            <label>Waveform: </label>
+            <select id="waveformControl">
+                <option value="sine">Sine</option>
+                <option value="square">Square</option>
+                <option value="sawtooth">Sawtooth</option>
+                <option value="triangle">Triangle</option>
+            </select>
+        </div>
+
+        <div class="section">
+            <h2>Buffer Example</h2>
+            <button id="startBuffer">Start Buffer</button>
+            <button id="stopBuffer">Stop Buffer</button>
+            <br>
+            <label>Playback Rate: </label>
+            <input type="range" id="rateControl" min="0.1" max="4" step="0.1" value="1">
+            <span id="rateDisplay">1x</span>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

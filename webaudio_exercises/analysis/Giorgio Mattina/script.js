@@ -1,5 +1,6 @@
 var audioContext = new AudioContext();
-
+attack = 1;
+release=3;
 playsound = function () {
   if (audioContext.state != 'running') {
     audioContext.resume();
@@ -31,7 +32,7 @@ playsound = function () {
 
 
   osc.start();
-
+  draw();
 }
 
 function draw() {
@@ -69,8 +70,7 @@ function draw() {
 window.addEventListener('load', function () {
   this.document.getElementById('bottone').addEventListener('click', playsound)
 })
-var attack = 20;
-var release = 200;
+
 
 function n2f(n) {
   return 440 * Math.pow(2, n / 12);

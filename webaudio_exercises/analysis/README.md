@@ -1,7 +1,7 @@
 # Instructions 
 
 Build a simple visualizer that displays the frequency spectrum of an audio input. 
-Too difficult? Stick to the time domain and display only the waveform
+Too difficult? Stick to the time domain and display only the waveform, check here [an example](https://developer.mozilla.org/en-US/docs/Web/API/BaseAudioContext/createAnalyser)
 
 Make a new directory with your name like in the example folder my_name.
 

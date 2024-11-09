@@ -71,8 +71,6 @@ window.addEventListener('load', function () {
   this.document.getElementById('bottone').addEventListener('click', playsound)
 })
 
-
 function n2f(n) {
   return 440 * Math.pow(2, n / 12);
 }
-

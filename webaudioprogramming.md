@@ -69,10 +69,15 @@ TONE.JS!
 
 ---
 
-## How can I get it?
+## How can I get and host it?
 
 1) Get Node.js from https://nodejs.org/en/download/package-manager
-2) Go to terminal: `npm install tone` 
+2) Go to terminal: `npm install tone`
+
+or 
+
+- Use Content Delivery Network to import tone.js directly in html:
+For example: https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js
 
 ---
 

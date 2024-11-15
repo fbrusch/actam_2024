@@ -85,5 +85,8 @@ For example: https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js
 
 https://tonejs.github.io/docs/15.0.4/index.html
 
+Relationship between the AudioContext time and the Transport's time here:
+https://github.com/Tonejs/Tone.js/wiki/TransportTime
+
 ---
 

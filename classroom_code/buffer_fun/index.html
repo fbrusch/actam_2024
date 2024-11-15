@@ -1,21 +1,31 @@
 <head>
-<script src="index.js">c</script>
-
+    <script src="index.js">c</script>
 </head>
 <style>
-    div {margin: 20px};
-</style>
-<body>
-    <h1>Welcome to my super application!</h1>
-    <div>
-        <!--input id="frequencyInput" type="range" min="10" 
-            max = "1000" step="1" value="440"-->
+    div {
+        margin: 20px
+    }
 
-        <button onclick="playBuffer(createsASineBuffer(440))">Play some 440hz sine wave!</button>
-        <button onclick="playBuffer(createsASineBuffer(550))">Play some 550hz sine wave!</button>
-    </div>
+    ;
+</style>
+
+<body>
+
+    <h1>Welcome to my super application!</h1>
+
     <div>
-        <button onclick="playBuffer(createsANoiseBuffer)">Play some noise!</button>
+        <div>
+            <input id="frequencyInput" type="range" min="100" max="10000" step="1" value="440"
+                oninput="freq=Number(this.value); this.nextElementSibling.value = this.value"> <output>440</output>
+        </div>
+        <button onclick="playBuffer(createBuffer('sine',freq))">Play a sine wave! (frequency above)</button> <i>or</i>
+        <button onclick="playBuffer(createBuffer('sine'))">Play a 440hz sine wave!</button>
+
     </div>
+
+    <div>
+        <button onclick="playBuffer(createBuffer('noise'))">Play some noise!</button>
+    </div>
+
     <button onclick="stop()">Stop!</button>
 </body>

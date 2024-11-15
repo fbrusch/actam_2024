@@ -16,3 +16,6 @@
 
 [intro tone.js](https://raw.githack.com/fbrusch/actam_2024/gh-pages/webaudioprogramming.html)
 
+[tone.js Playground!](https://fbrusch.github.io/actam_2024/playground/playground.html)
+
+

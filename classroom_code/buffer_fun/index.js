@@ -25,6 +25,7 @@ function playBuffer(bufferCreator) {
     b = bufferCreator();
     const bs = c.createBufferSource();
     bs.buffer = b;
+    //bs.loop = true;
     bs.connect(c.destination);
     bs.start();
 }

@@ -12,7 +12,7 @@ playsound = function () {
   osc.connect(g);
   osc.frequency.value = (parseInt(document.getElementById('frequency').value));
   g.gain.setValueAtTime(0, audioContext.currentTime);
-  g.gain.linearRampToValueAtTime(1, audioContext.currentTime + attack);
+  g.gain.linearRampToValueAtTime(0.5, audioContext.currentTime + attack);
   g.gain.linearRampToValueAtTime(0, audioContext.currentTime + attack + release);
 
 
@@ -60,10 +60,8 @@ function draw() {
     } else {
       canvasCtx.lineTo(x, y);
     }
-
     x += sliceWidth;
   }
-
   canvasCtx.lineTo(canvas.width, canvas.height / 2);
   canvasCtx.stroke();
 }

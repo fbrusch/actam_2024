@@ -102,7 +102,39 @@
 <body>
     <h1>tone.js playground</h1>
     <div id="editor-container">
-        <div id="editor">//my code goes heree;</div>
+        <div id="editor">//my code goes heree;
+            // optional effects
+const distortion = new Tone.Distortion(4.8).toDestination();
+const delay = new Tone.Delay(0.25).toDestination();
+
+// define my synths
+const synth = new Tone.Synth({
+    oscillator : {type: "sine"}}).connect(delay);
+
+const synth2 = new Tone.Synth({
+    oscillator : {type: "triangle"},
+    volume : +3 
+}).toDestination().connect(distortion);    
+    
+/*setInterval(() => {
+    synth.triggerAttackRelease("C4", "4n");
+}, 1000)
+*/
+Tone.Transport.bpm.value = 200;
+const melody = ["C4", "D4", "E4", "C4"];
+const harmonics = ["A3", "B3", "E4", "A3"];
+
+let index = 0;
+
+Tone.Transport.scheduleRepeat((time) => {
+    synth.triggerAttackRelease(melody[index], "4n", time);
+    synth2.triggerAttackRelease(harmonics[index], "4n", time);
+    index = (index + 1) % melody.length ;
+}, "2n")
+
+Tone.Transport.start("+0.5")
+
+        </div>
         <div class="controls">
             <button id="runBtn">▶ Run</button>
             <button id="stopBtn">⏹ Stop</button>
@@ -149,7 +181,6 @@
                 
                 // Get code from editor
                 const code = editor.getValue();
-                
                 
                 status.textContent = 'Playing...';
     

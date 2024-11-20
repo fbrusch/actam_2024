@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Altezza della finestra */
+    background-color: #363535; /* Colore di sfondo del body */
+}
+
+.master_container {
+    background-color: rgb(67, 64, 64); /* Colore di sfondo nero */
+    width: 400px; /* Larghezza del contenitore */
+    height: 200px; /* Altezza del contenitore */
+    display: flex;
+    justify-content: center; /* Centra gli elementi orizzontalmente */
+    align-items: center; /* Centra gli elementi verticalmente */
+    border-radius: 10px; /* Bordo arrotondato opzionale */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Effetto ombra */
+    position: relative; /* Necessario per posizionare elementi figli assolutamente */
+}
+
+#poweBtn {
+    width: 30px; /* Diametro del cerchio */
+    height: 30px; /* Diametro del cerchio */
+    background-color: rgb(18, 153, 9); /* Colore del pulsante di accensione */
+    border-radius: 50%; /* Trasforma in un cerchio */
+    position: absolute; /* Posizionamento assoluto rispetto al contenitore */
+    top: 10px; /* Distanza dal bordo superiore del contenitore */
+    left: 10px; /* Distanza dal bordo sinistro del contenitore */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Effetto ombra */
+}
+
+.key {
+    width: 50px; /* Larghezza di ogni quadrato */
+    height: 50px; /* Altezza di ogni quadrato */
+    background-color: rgb(120, 117, 117); /* Colore dei quadrati */
+    margin: 0 10px; /* Spaziatura orizzontale tra i quadrati */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #ccc; /* Bordo dei quadrati */
+    border-radius: 5px; /* Angoli leggermente arrotondati */
+}
+

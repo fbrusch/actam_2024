@@ -13,3 +13,6 @@ Use this official documentation for reference https://developer.mozilla.org/en-U
 
 Please share [here](https://forms.gle/EKzyaYY2g6qAkb116) the song you'd like to emulate in a javascript app
 
+Please VOTE [here](https://forms.gle/fiPbR3TNouXVPCMi6) the song you'd like to emulate in a javascript app
+
+

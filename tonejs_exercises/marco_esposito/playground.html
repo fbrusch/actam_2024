@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tone.js Playground</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.2/ace.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.2/ext-language_tools.js"></script>
     <style>
         * {
             margin: 0;
@@ -32,12 +34,12 @@
         #editor-container {
             background: #fff;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             margin-bottom: 1rem;
             padding: 1rem;
         }
 
-        #editor { 
+        #editor {
             width: 100%;
             height: 400px;
             border-radius: 4px;
@@ -99,40 +101,41 @@
         }
     </style>
 </head>
+
 <body>
     <h1>tone.js playground</h1>
     <div id="editor-container">
         <div id="editor">//my code goes heree;
             // optional effects
-const distortion = new Tone.Distortion(4.8).toDestination();
-const delay = new Tone.Delay(0.25).toDestination();
+            const distortion = new Tone.Distortion(4.8).toDestination();
+            const delay = new Tone.Delay(0.25).toDestination();
 
-// define my synths
-const synth = new Tone.Synth({
-    oscillator : {type: "sine"}}).connect(delay);
+            // define my synths
+            const synth = new Tone.Synth({
+            oscillator : {type: "sine"}}).connect(delay);
 
-const synth2 = new Tone.Synth({
-    oscillator : {type: "triangle"},
-    volume : +3 
-}).toDestination().connect(distortion);    
-    
-/*setInterval(() => {
-    synth.triggerAttackRelease("C4", "4n");
-}, 1000)
-*/
-Tone.Transport.bpm.value = 200;
-const melody = ["C4", "D4", "E4", "C4"];
-const harmonics = ["A3", "B3", "E4", "A3"];
+            const synth2 = new Tone.Synth({
+            oscillator : {type: "triangle"},
+            volume : +3
+            }).toDestination().connect(distortion);
 
-let index = 0;
+            /*setInterval(() => {
+            synth.triggerAttackRelease("C4", "4n");
+            }, 1000)
+            */
+            Tone.Transport.bpm.value = 200;
+            const melody = ["C4", "D4", "E4", "C4"];
+            const harmonics = ["A3", "B3", "E4", "A3"];
 
-Tone.Transport.scheduleRepeat((time) => {
-    synth.triggerAttackRelease(melody[index], "4n", time);
-    synth2.triggerAttackRelease(harmonics[index], "4n", time);
-    index = (index + 1) % melody.length ;
-}, "2n")
+            let index = 0;
 
-Tone.Transport.start("+0.5")
+            Tone.Transport.scheduleRepeat((time) => {
+            synth.triggerAttackRelease(melody[index], "4n", time);
+            synth2.triggerAttackRelease(harmonics[index], "4n", time);
+            index = (index + 1) % melody.length ;
+            }, "2n")
+
+            Tone.Transport.start("+0.5")
 
         </div>
         <div class="controls">
@@ -146,6 +149,7 @@ Tone.Transport.start("+0.5")
     <script>
         // Initialize Ace editor
         const editor = ace.edit("editor");
+        ace.require("ace/ext/language_tools");
         editor.setTheme("ace/theme/monokai");
         editor.session.setMode("ace/mode/javascript");
         editor.setOptions({
@@ -154,6 +158,9 @@ Tone.Transport.start("+0.5")
             showGutter: true,
             highlightActiveLine: true,
             wrap: true,
+            enableBasicAutocompletion: true,
+            enableSnippets: true,
+            enableLiveAutocompletion: true
         });
 
         // Elements
@@ -167,7 +174,7 @@ Tone.Transport.start("+0.5")
 
         // Run code
         async function runCode() {
-             // Clear any previous error messages and show status
+            // Clear any previous error messages and show status
             try {
                 error.style.display = 'none';
                 status.style.display = 'block';
@@ -178,19 +185,19 @@ Tone.Transport.start("+0.5")
                 // which is triggered by a user action such as “click” or “keydown”.
                 // Initialize Tone.js audio context
                 await Tone.start();
-                
+
                 // Get code from editor
                 const code = editor.getValue();
-                
+
                 status.textContent = 'Playing...';
-    
+
                 // This line is crucial - it modifies the user's code to store the synth
                 // It replaces 'new Tone.Synth()' with 'currentSynth = new Tone.Synth()'
                 // This allows the stop function to access and dispose of the synth later
                 const oldSynth = code.replace('new Tone.Synth()', 'currentSynth = new Tone.Synth()');
                 // Run the code
                 eval(oldSynth);
-                
+
             } catch (err) {
                 error.style.display = 'block';
                 error.textContent = `Error: ${err.message}`;
@@ -204,8 +211,8 @@ Tone.Transport.start("+0.5")
                 // Stop transport and cancel scheduled events
                 Tone.Transport.stop();
                 Tone.Transport.cancel();
-                
-               // If there's an active synthesizer:
+
+                // If there's an active synthesizer:
                 if (currentSynth) {
                     try {
                         // Release any currently playing notes
@@ -219,9 +226,9 @@ Tone.Transport.start("+0.5")
                         console.log('Error disposing synth:', e);
                     }
                 }
-                
+
                 status.style.display = 'none';
-                
+
             } catch (err) {
                 error.style.display = 'block';
                 error.textContent = `Error while stopping: ${err.message}`;
@@ -231,9 +238,8 @@ Tone.Transport.start("+0.5")
         // Event listeners
         runBtn.addEventListener('click', runCode);
         stopBtn.addEventListener('click', stopCode);
-        
+
     </script>
 </body>
+
 </html>
-
-

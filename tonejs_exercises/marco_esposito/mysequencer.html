@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drum Machine</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #1a1a1a;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+            padding: 2rem;
+            background-color: #2a2a2a;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        .power-section {
+            position: absolute;
+            top: 10px; 
+            left: 10px; 
+            display: flex;
+            align-items: center;
+            gap: 5px; 
+        }
+        .power-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid #4CAF50;
+            background-color: transparent;
+            color: #4CAF50;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+        .power-btn:hover {
+            background-color: rgba(76, 175, 80, 0.1);
+        }
+        .power-btn.on {
+            background-color: #4CAF50;
+            color: white;
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+        }
+        .power-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #666;
+            transition: all 0.3s ease;
+        }
+        .power-indicator.on {
+            background-color: #4CAF50;
+            box-shadow: 0 0 10px #4CAF50;
+        }
+        .drum-interface {
+            margin-top: 40px;
+            opacity: 0.5;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+        .drum-interface.on {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .key {
+            display: inline-block;
+            margin: 10px;
+            padding: 20px 30px;
+            background-color: #3a3a3a;
+            color: white;
+            border-radius: 5px;
+            font-size: 24px;
+            transition: all 0.1s;
+        }
+        .key.active {
+            background-color: #4CAF50;
+            transform: scale(0.95);
+        }
+        .status {
+            color: white;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        #stopBtn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #stopBtn:hover {
+            background-color: #cc0000;
+        }
+        .controls {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="power-section">
+            <button id="powerBtn" class="power-btn">⏻</button>
+            <div class="power-indicator"></div>
+        </div>
+        <div class="drum-interface">
+            <div class="key" data-key="I">I</div>
+            <div class="key" data-key="O">O</div>
+            <div class="key" data-key="P">P</div>
+            <div class="status">Press ENTER to start/stop recording</div>
+            <div class="controls">
+                <button id="stopBtn">⏹ Stop</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isInitialized = false;
+        let loop;
+        
+        // Initialize audio context after user gesture
+        document.getElementById('powerBtn').addEventListener('click', async () => {
+            if (!isInitialized) {
+                // wait to initialize!
+                await Tone.start();
+
+                // Update UI to show powered on state
+                document.getElementById('powerBtn').classList.add('on');
+                document.querySelector('.power-indicator').classList.add('on');
+                document.querySelector('.drum-interface').classList.add('on');
+
+                // Create players
+                const players = new Tone.Players({
+                    kick: "kick.mp3",
+                    hit: "hihat.mp3",
+                    snare: "snare.mp3",
+                }).toDestination(); 
+
+                // Map keys to sound names
+                const keyMap = {
+                    'I': 'kick',
+                    'O': 'hit',
+                    'P': 'snare'
+                }
+
+                // Recording variables
+                let isRecording = false;
+                let recordedEvents = [];
+                let startTime;
+                // Key elements
+                const keys = document.querySelectorAll('.key');
+                
+                // *** Function to handle key press animation
+                function animateKey(key) {
+                    const keyElement = document.querySelector(`[data-key="${key}"]`); 
+                    if (keyElement) {
+                        keyElement.classList.add('active');
+                        setTimeout(() => keyElement.classList.remove('active'), 100);
+                    }
+                }
+                
+                // *** Function to play a sound corresponding to a key press
+                function playSound(key) {
+                    const soundName = keyMap[key];
+                    // check if the soundname exists
+                    if (soundName && players.has(soundName)) {
+                        players.player(soundName).start();
+                        animateKey(key);
+
+                        if (isRecording){
+                            const time = Tone.now() - startTime;
+                            console.log("Tone.now() ", Tone.now());
+                            console.log("startTime ", startTime);
+                            console.log("time ", time);
+                            recordedEvents.push({note: key, time});
+                        }
+                    }
+                }
+
+                // Function to stop everything
+                function stopEverything() {
+                    if (loop) {
+                        loop.dispose();
+                    }
+                    Tone.Transport.stop();
+                    Tone.Transport.cancel();
+                    isRecording = false;
+                    document.querySelector('.status').textContent = 'Press ENTER to start/stop recording';
+                }
+
+                // Handle keyboard events
+                document.addEventListener('keydown', async (e) => {
+                    if (e.repeat) return;
+                    const key = e.key.toUpperCase();
+
+                    // Handle spacebar for stop
+                    if (e.code === 'Space') {
+                        e.preventDefault();
+                        stopEverything();
+                        return;
+                    }
+
+                    // Handle drum sounds
+                    if (keyMap.hasOwnProperty(key)) {
+                        playSound(key);
+                    }
+                    // Handle recording
+                    else if (e.key === 'Enter') {
+                        if (!isRecording) {
+                            // Start recording
+                            isRecording = true;
+                            recordedEvents = [];
+                            startTime = Tone.now();
+                            document.querySelector('.status').textContent = 'Hey it is recording! ';
+
+                        
+                        } else {
+                            // Stop recording and start playback
+                            isRecording = false;
+                            document.querySelector('.status').textContent = 'Hey it is looping! ';
+
+                            if (recordedEvents.length > 0) {
+                                // Create a new loop
+                                if (loop) {
+                                    loop.dispose();
+                                }
+                                // define the loop duration 
+                                const loopDuration = recordedEvents[recordedEvents.length - 1].time;
+                                console.log("loopDuration ", loopDuration);
+                                // define and start the Loop!
+                                loop = new Tone.Loop(time => {
+                                    recordedEvents.forEach(event => {
+                                        const soundName = keyMap[event.note]
+                                        players.player(soundName).start(time + event.time);
+                                        setTimeout(() => animateKey(event.note), event.time * 1000); 
+                                    });
+                                }, loopDuration).start(0);
+
+                                Tone.Transport.start();
+              
+                            }
+                        }
+                    }
+                });
+
+                // handle mouse clicks on keys
+                keys.forEach(key => {
+                    key.addEventListener('mousedown', () => {
+                        const keyValue = key.getAttribute('data-key');
+                        playSound(keyValue);
+                    });
+                });
+
+                // handle stop button click
+                document.getElementById('stopBtn').addEventListener('click', stopEverything);
+                isInitialized = true;
+            
+
+            }
+        });
+    </script>
+</body>
+</html>

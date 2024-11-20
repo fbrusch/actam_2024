@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Drum Sequencer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: #f0f0f0;
+        }
+        .controls {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .tempo-control {
+            margin-top: 1rem;
+        }
+        .tempo-control label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        #tempo {
+            width: 100%;
+        }
+        #bpmDisplay {
+            margin-top: 0.5rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <button id="playButton">Play</button>
+        <button id="stopButton">Stop</button>
+        
+        <div class="tempo-control">
+            <label for="tempo">Tempo: </label>
+            <input type="range" id="tempo" min="60" max="200" value="120">
+            <div id="bpmDisplay">120 BPM</div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Tone.js players
+        const players = new Tone.Players({
+            kick: "kick.mp3",
+            hit: "hihat.mp3",
+            snare: "snare.mp3"
+        }).toDestination();
+
+        // Create sequence pattern
+        let index = 0;
+        const sequence = new Tone.Sequence((time, step) => {
+            if (step === 0) {
+                players.player('kick').start();
+            } else if (step === 1) {
+                players.player('hit').start();
+            } else if (step === 2) {
+                players.player('snare').start();
+            }
+        }, [0, 1, 2], "4n");
+
+        // UI Controls
+        const playButton = document.getElementById('playButton');
+        const stopButton = document.getElementById('stopButton');
+        const tempoSlider = document.getElementById('tempo');
+        const bpmDisplay = document.getElementById('bpmDisplay');
+
+        // Play button handler
+        playButton.addEventListener('click', async () => {
+            // Start audio context if it's not started
+            await Tone.start();
+            if (Tone.Transport.state !== "started") {
+                sequence.start(0);
+                Tone.Transport.start();
+                playButton.textContent = 'Pause';
+            } else {
+                Tone.Transport.pause();
+                playButton.textContent = 'Play';
+            }
+        });
+
+        // Stop button handler
+        stopButton.addEventListener('click', () => {
+            Tone.Transport.stop();
+            sequence.stop();
+            playButton.textContent = 'Play';
+        });
+
+        function debounce(func, delay) {
+            let timeout;
+            return function (...args){
+                // clear all the time outs
+                clearTimeout(timeout);
+                timeout = setTimeout(() =>{
+                    func.apply(this, args);
+                }, delay);
+            };
+        }
+
+
+        const updateTempo = debounce((tempo) => {
+            Tone.Transport.bpm.value = tempo;
+        }, 3000);
+
+        // Tempo control
+        tempoSlider.addEventListener('input', (e) => {
+            const tempo = parseInt(e.target.value);
+            //Tone.Transport.bpm.value = tempo;
+            updateTempo(tempo);
+            bpmDisplay.textContent = `${tempo} BPM`;
+        });
+
+        // Set initial tempo
+        Tone.Transport.bpm.value = 120;
+    </script>
+</body>
+</html>

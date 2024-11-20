@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Simple Drum Sequencer</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -118,6 +119,14 @@
             };
         }
 
+        const updateTempo2 = _.debounce((tempo) => {
+            Tone.Transport.bpm.value = tempo;
+        }, 3000, {
+            leading: true,   
+            trailing: false,  
+            maxWait: 5000   
+        });
+
 
         const updateTempo = debounce((tempo) => {
             Tone.Transport.bpm.value = tempo;
@@ -127,7 +136,7 @@
         tempoSlider.addEventListener('input', (e) => {
             const tempo = parseInt(e.target.value);
             //Tone.Transport.bpm.value = tempo;
-            updateTempo(tempo);
+            updateTempo2(tempo);
             bpmDisplay.textContent = `${tempo} BPM`;
         });
 

@@ -182,9 +182,10 @@
                         animateKey(key);
 
                         if (isRecording){
-                            const time = Tone.now() - startTime;
-                            console.log("Tone.now() ", Tone.now());
-                            console.log("startTime ", startTime);
+                            //const time = Tone.now() - startTime; ****
+                            const time = Tone.Transport.seconds;
+                            //console.log("Tone.now() ", Tone.now());
+                            //console.log("startTime ", startTime);
                             console.log("time ", time);
                             recordedEvents.push({note: key, time});
                         }
@@ -224,7 +225,8 @@
                             // Start recording
                             isRecording = true;
                             recordedEvents = [];
-                            startTime = Tone.now();
+                            Tone.Transport.start();
+                            //startTime = Tone.now(); ***
                             document.querySelector('.status').textContent = 'Hey it is recording! ';
 
                         
@@ -246,11 +248,13 @@
                                     recordedEvents.forEach(event => {
                                         const soundName = keyMap[event.note]
                                         players.player(soundName).start(time + event.time);
+                                        console.log("event.time ", event.time)
+                                        console.log("start at: ", time + event.time)
                                         setTimeout(() => animateKey(event.note), event.time * 1000); 
                                     });
                                 }, loopDuration).start(0);
 
-                                Tone.Transport.start();
+                                //Tone.Transport.start(); ***
               
                             }
                         }

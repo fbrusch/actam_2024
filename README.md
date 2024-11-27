@@ -18,4 +18,4 @@
 
 [tone.js Playground!](https://fbrusch.github.io/actam_2024/playground/playground.html)
 
-
+[web audio hackathon](https://raw.githack.com/fbrusch/actam_2024/gh-pages/hack2instructions.html)

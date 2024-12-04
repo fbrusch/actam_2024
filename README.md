@@ -19,3 +19,5 @@
 [tone.js Playground!](https://fbrusch.github.io/actam_2024/playground/playground.html)
 
 [webaudio hackathon](https://raw.githack.com/fbrusch/actam_2024/gh-pages/hack2instructions.html)
+
+[intro to microbit](https://raw.githack.com/fbrusch/actam_2024/gh-pages/embeddedprogramming.html)

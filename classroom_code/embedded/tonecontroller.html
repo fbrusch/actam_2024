@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Micro:bit Simple Tone Controller</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <style>
+        body {
+            font-family: system-ui;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        button {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        #status,
+        #debug {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-radius: 4px;
+        }
+
+        .connected {
+            background: #e6ffe6;
+            color: #006600;
+        }
+
+        .disconnected {
+            background: #ffe6e6;
+            color: #660000;
+        }
+
+        #debug {
+            background: #f0f0f0;
+            font-family: monospace;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Micro:bit Simple Tone Controller</h1>
+    <button id="connectBtn">Connect Micro:bit</button>
+    <div id="status" class="disconnected">Not connected</div>
+    <div id="debug">Waiting for data...</div>
+
+    <script>
+        let synth = null;
+        let port;
+        let reader;
+        const frequencies = {
+            A: 440,
+            B: 880
+        };
+
+        async function initSynth() {
+            await Tone.start();
+            synth = new Tone.Oscillator({
+                frequency: frequencies.A,
+                type: "sine"
+            }).toDestination();
+            // Don't start the synth immediately
+        }
+
+        document.getElementById('connectBtn').addEventListener('click', async () => {
+            try {
+                port = await navigator.serial.requestPort();
+                await port.open({ baudRate: 115200 });
+                document.getElementById('status').textContent = 'Connected to Micro:bit!';
+                document.getElementById('status').className = 'connected';
+                await initSynth(); // Initialize but don't start
+                readData();
+            } catch (error) {
+                console.error('Connection error:', error);
+                document.getElementById('status').textContent = 'Connection failed: ' + error;
+                document.getElementById('status').className = 'disconnected';
+            }
+        });
+
+        // a buffering approach is necessary because serial data can arrive in fragments
+        let inputBuffer = '';
+        let isPlaying = false;
+
+        async function readData() {
+            // The serial data read from the micro:bit is in the form of raw bytes
+            const decoder = new TextDecoder(); 
+            const debugEl = document.getElementById('debug');
+            try {
+                // to read data asynchronously from the stream
+                reader = port.readable.getReader();
+
+                // keep listening for and processing data as long as the serial port is open
+                while (true) {
+                    const { value, done } = await reader.read();
+                    if (done) {
+                        reader.releaseLock();
+                        break;
+                    }
+
+                    // Convert the raw bytes to text
+                    const newData = decoder.decode(value);
+                    console.log('Raw received data:', newData); 
+                    debugEl.textContent = 'Last received data: ' + newData;
+
+                    // Add the new chunk to our existing buffer
+                    // This is necessary because one button press might be split across multiple chunks
+                    inputBuffer += newData;
+                    
+                    // Check if we have a complete line (ending in newline character)
+                    // Returns -1 if no newline is found
+                    let lineEnd = inputBuffer.indexOf('\n');
+                    console.log("lineEnd ", lineEnd);
+
+                    // If indexOf('\n') returns -1, it means no newline character was found yet
+
+                    while (lineEnd >= 0) {
+                        // Extract the complete line (without the newline character)
+                        const line = inputBuffer.slice(0, lineEnd).trim();
+
+                        // Remove the processed line from the buffer, keeping any remaining partial data
+                        inputBuffer = inputBuffer.slice(lineEnd + 1);
+
+                        console.log('Processing line:', line);
+                        debugEl.textContent += '\nProcessing: ' + line;
+
+                        if (line === 'A' || line === 'B') {
+                            console.log(`Button ${line} pressed`);
+                            debugEl.textContent += `\nButton ${line} pressed`;
+
+                            if (!isPlaying) {
+                                synth.start();
+                                isPlaying = true;
+                            }
+
+                            synth.frequency.rampTo(frequencies[line], 0.1);
+
+                        } else if (line === 'S') {
+                            console.log('Stop button pressed');
+                            debugEl.textContent += '\nStop button pressed';
+
+                            if (synth && isPlaying) {
+                                synth.stop();
+                                isPlaying = false;
+                            }
+                        }
+
+                        lineEnd = inputBuffer.indexOf('\n');
+                    }
+                }
+            } catch (error) {
+                console.error('Read error:', error);
+                document.getElementById('status').textContent = 'Connection lost: ' + error;
+                document.getElementById('status').className = 'disconnected';
+                if (synth && isPlaying) {
+                    synth.stop();
+                    isPlaying = false;
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>

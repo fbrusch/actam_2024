@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Micro:bit Pitch Modulator with Distortion</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <style>
+        body {
+            font-family: system-ui;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        button {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        #status,
+        #debug {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-radius: 4px;
+        }
+
+        .connected {
+            background: #e6ffe6;
+            color: #006600;
+        }
+
+        .disconnected {
+            background: #ffe6e6;
+            color: #660000;
+        }
+
+        #debug {
+            background: #f0f0f0;
+            font-family: monospace;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Micro:bit Pitch Modulator with Distortion</h1>
+    <button id="connectBtn">Connect Micro:bit</button>
+    <div id="status" class="disconnected">Not connected</div>
+    <div id="debug">Waiting for data...</div>
+
+    <script>
+        let synth = null;
+        let distortion = null;
+        let port;
+        let reader;
+        let currentValue = null;
+        let isPressed = false;
+        let distortionInterval = null;
+        let currentDistortion = 0;
+        let isPlaying = false;
+
+        async function initSynth() {
+            await Tone.start();
+
+            // Create distortion effect
+            distortion = new Tone.Distortion(0).toDestination();
+
+            // Create synth and connect to distortion
+            synth = new Tone.Synth({
+                oscillator: {
+                    type: "sine"
+                },
+                envelope: {
+                    attack: 0.1,
+                    decay: 0.2,
+                    sustain: 0.8,
+                    release: 1
+                }
+            }).connect(distortion);
+
+            Tone.Transport.start();
+        }
+
+        function mapValueToFrequency(value, prevValue) {
+            const MIN_FREQ = 80;
+            // Calculate base frequency by scaling input value
+            const baseFreq = MIN_FREQ + (value * 6);
+            // If we have a previous value, smooth the transition
+            if (prevValue !== null) {
+                // Calculate how different new value is from previous
+                const diff = Math.abs(value - prevValue);
+
+                // Create smoothing factor (0-1) based on difference
+                const smoothingFactor = Math.min(diff / 100, 1);
+
+                // Interpolate between previous and target frequency
+                const targetFreq = Math.max(MIN_FREQ, prevValue + (baseFreq - prevValue) * smoothingFactor);
+                return targetFreq;
+            }
+
+            // For first value, just retu
+            return Math.max(MIN_FREQ, baseFreq);
+        }
+
+        function startDistortionIncrease() {
+            if (distortionInterval) return;
+
+            currentDistortion = 0; // Reset distortion when starting
+            distortionInterval = setInterval(() => {
+                // Exponential increase
+                const exponentialFactor = Math.pow(1.1, currentDistortion * 5);
+                currentDistortion = Math.min(currentDistortion + (0.02 * exponentialFactor), 1);
+                distortion.distortion = currentDistortion;
+                document.getElementById('debug').textContent += `\nDistortion: ${currentDistortion.toFixed(2)}`;
+            }, 100);
+        }
+
+        function stopDistortionIncrease() {
+            if (distortionInterval) {
+                clearInterval(distortionInterval);
+                distortionInterval = null;
+            }
+
+            // Gradually decrease distortion
+            const releaseInterval = setInterval(() => {
+                currentDistortion = Math.max(currentDistortion - 0.1, 0);
+                distortion.distortion = currentDistortion;
+                document.getElementById('debug').textContent += `\nDistortion: ${currentDistortion.toFixed(2)}`;
+
+                if (currentDistortion <= 0) {
+                    clearInterval(releaseInterval);
+                }
+            }, 100);
+        }
+
+        async function readData() {
+            const decoder = new TextDecoder();
+            const debugEl = document.getElementById('debug');
+
+            try {
+                reader = port.readable.getReader();
+                while (true) {
+                    const { value, done } = await reader.read();
+                    if (done) break;
+
+                    const number = parseInt(decoder.decode(value));
+                    console.log("number ", number);
+                    if (!isNaN(number)) {
+                        if (number === 101) {  // Pin released
+                            isPressed = false;
+                            stopDistortionIncrease();
+                            synth.triggerRelease();
+                            isPlaying = false;
+                            debugEl.textContent = 'Pin released';
+                        } else {  // Pin pressed
+                            if (!isPressed) {
+                                isPressed = true;
+                                startDistortionIncrease();
+                            }
+
+                            const freq = mapValueToFrequency(number, currentValue);
+
+                            // If not already playing, trigger attack
+                            if (!isPlaying) {
+                                synth.triggerAttack(freq);
+                                isPlaying = true;
+                            } else {
+                                // If already playing, just set the frequency
+                                synth.frequency.setValueAtTime(freq);
+                            }
+
+                            currentValue = number;
+                            debugEl.textContent = `Received: ${number}, Frequency: ${freq.toFixed(2)} Hz`;
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('Read error:', error);
+                document.getElementById('status').textContent = 'Connection lost: ' + error;
+                document.getElementById('status').className = 'disconnected';
+            }
+        }
+
+        document.getElementById('connectBtn').addEventListener('click', async () => {
+            try {
+                port = await navigator.serial.requestPort();
+                await port.open({ baudRate: 115200 });
+                document.getElementById('status').textContent = 'Connected to Micro:bit!';
+                document.getElementById('status').className = 'connected';
+                await initSynth();
+                readData();
+            } catch (error) {
+                console.error('Connection error:', error);
+                document.getElementById('status').textContent = 'Connection failed: ' + error;
+                document.getElementById('status').className = 'disconnected';
+            }
+        });
+    </script>
+</body>
+
+</html>

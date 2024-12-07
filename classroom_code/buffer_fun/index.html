@@ -11,11 +11,11 @@
         <!--input id="frequencyInput" type="range" min="10" 
             max = "1000" step="1" value="440"-->
 
-        <button onclick="playBuffer(createsASineBuffer(440))">Play some 440hz sine wave!</button>
-        <button onclick="playBuffer(createsASineBuffer(550))">Play some 550hz sine wave!</button>
+        <button onclick="playBuffer(createsABuffer(true,440))">Play some 440hz sine wave!</button>
+        <button onclick="playBuffer(createsABuffer(true,550))">Play some 550hz sine wave!</button>
     </div>
     <div>
-        <button onclick="playBuffer(createsANoiseBuffer)">Play some noise!</button>
+        <button onclick="playBuffer(createsABuffer(false))">Play some noise!</button>
     </div>
     <button onclick="stop()">Stop!</button>
 </body>

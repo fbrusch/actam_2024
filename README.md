@@ -14,8 +14,10 @@
 
 [web audio api exercises](https://github.com/fbrusch/actam_2024/tree/exercises) ->[link alla registrazione](https://politecnicomilano.webex.com/webappng/sites/politecnicomilano/recording/a5b683178d7c4391b8cf474a452a5d4e/playback)
 
-[intro tone.js](https://raw.githack.com/fbrusch/actam_2024/gh-pages/webaudioprogramming.html)
+[intro tone.js](https://raw.githack.com/fbrusch/actam_2024/gh-pages/webaudioprogramming.html) ->[link alla registrazione](https://politecnicomilano.webex.com/webappng/sites/politecnicomilano/recording/50faa178e0ae4a47b98f8f5bb84a16b3/playback)
 
 [tone.js Playground!](https://fbrusch.github.io/actam_2024/playground/playground.html)
 
+[webaudio hackathon](https://raw.githack.com/fbrusch/actam_2024/gh-pages/hack2instructions.html)
 
+[intro to microbit](https://raw.githack.com/fbrusch/actam_2024/gh-pages/embeddedprogramming.html) ->[link alla registrazione](https://politecnicomilano.webex.com/webappng/sites/politecnicomilano/recording/bbb0bf42ff144bd6bd8956965029c1b2/playback)

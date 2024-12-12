@@ -4,7 +4,7 @@ theme: default
 paginate: true
 ---
 
-# ACTAM - Embedded programming with Advanced tools
+# ACTAM - Advanced tools for embedded music programming 
 ## 12/12/2024
 
 ---
@@ -21,7 +21,7 @@ paginate: true
 * Perfect for interactive music and sound projects
 * Check these out https://www.arduino.cc/education/arduino-instruments/
 
---
+---
 
 ## Available Boards
 https://www.arduino.cc/en/hardware 
@@ -32,7 +32,7 @@ https://www.arduino.cc/en/hardware
   - Ideal for complex audio synthesis
 * **Arduino Mega**: More I/O pins for multiple controllers/sensors
 
---
+---
 
 ## How can I program it?
 
@@ -45,7 +45,7 @@ Get started with [this IDE](https://docs.arduino.cc/software/ide-v2/tutorials/ge
 
 * A good way to start: https://www.tomshardware.com/how-to/use-arduino-ide-2
 
--- 
+--- 
 
 ## Basic tone generation
 
@@ -61,12 +61,9 @@ void loop() {
 }
 ```
 
-## Mozzi Library Example
-Advanced synthesis using the Mozzi library:
+---
 
---
-
-## Arduino as MIDI Controller
+### Arduino as MIDI Controller
 ```cpp
 void setup() {
   Serial.begin(9600);
@@ -79,9 +76,9 @@ void loop() {
   delay(10);
 }
 ```
---
+---
 
-## Arduino with Web Audio API
+### Arduino with Web Audio API
 ```javascript
 // Receiving Arduino data via Web Serial API
 async function connectArduino() {
@@ -97,7 +94,7 @@ async function connectArduino() {
   }
 }
 ```
--- 
+--- 
 
 ## What's SuperCollider? Isn't SonicPi enough?
 
@@ -105,9 +102,9 @@ async function connectArduino() {
 * real-time audio server (spectral analysis, manipulation, and resynthesis with FFT)
 * can define your own synthesis algorithms
 
--- 
+--- 
 
-## Basic SuperCollider Syntax
+### Basic SuperCollider Syntax
 
 ```supercollider
 (
@@ -124,7 +121,7 @@ x.set(\freq, 880);
 x.free; // Stop
 ```
 
--- 
+--# 
 
 ## SuperCollider getting Arduino Data
 
@@ -145,7 +142,7 @@ r = Routine({
 }).play;
 ```
 
-## Arduino Code for SuperCollider
+### Arduino code for SuperCollider
 Same as for web audio api 
 
 ```cpp
@@ -162,7 +159,7 @@ void loop() {
 }
 ```
 
---
+---
 
 ## Project Ideas & Applications
 

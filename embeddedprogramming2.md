@@ -23,7 +23,7 @@ paginate: true
 
 --
 
-### Available Boards
+## Available Boards
 https://www.arduino.cc/en/hardware 
 * **Arduino Uno**: Basic board, good for simple audio projects
 * **Arduino Due**: 
@@ -107,7 +107,7 @@ async function connectArduino() {
 
 -- 
 
-### Basic SuperCollider Syntax
+## Basic SuperCollider Syntax
 
 ```supercollider
 (
@@ -126,7 +126,7 @@ x.free; // Stop
 
 -- 
 
-### SuperCollider getting Arduino Data
+## SuperCollider getting Arduino Data
 
 ```supercollider
 SerialPort.listDevices; // List available ports
@@ -145,7 +145,7 @@ r = Routine({
 }).play;
 ```
 
-### Arduino Code for SuperCollider
+## Arduino Code for SuperCollider
 Same as for web audio api 
 
 ```cpp
@@ -165,9 +165,8 @@ void loop() {
 --
 
 ## Project Ideas & Applications
-You can create:
+
 * Interactive sound installations
-* MIDI controllers
 * Gesture-controlled synthesizers
 * Real-time audio effects processors
 * Sensor-based music generators

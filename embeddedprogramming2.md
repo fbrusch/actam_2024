@@ -47,6 +47,22 @@ Get started with [this IDE](https://docs.arduino.cc/software/ide-v2/tutorials/ge
 
 --- 
 
+### Arduino as MIDI Controller
+```cpp
+void setup() {
+  Serial.begin(9600);
+}
+void loop() {
+  int sensorValue = analogRead(A0);
+  // Map sensor to MIDI values (0-127)
+  byte midiValue = map(sensorValue, 0, 1023, 0, 127);
+  Serial.write(midiValue);
+  delay(10);
+}
+```
+
+---
+
 ## Basic tone generation
 
 ```cpp
@@ -62,20 +78,34 @@ void loop() {
 ```
 
 ---
-
-### Arduino as MIDI Controller
+## Basic DAC generation
+For example on Arduino Due:
 ```cpp
+const int dacPin = DAC1; 
+
 void setup() {
-  Serial.begin(9600);
+  // No need to set pinMode for DAC pins
+  // here we could precompute sine wave values scaled to DAC
 }
+
+// SAWTOOTH
 void loop() {
-  int sensorValue = analogRead(A0);
-  // Map sensor to MIDI values (0-127)
-  byte midiValue = map(sensorValue, 0, 1023, 0, 127);
-  Serial.write(midiValue);
-  delay(10);
+  for (int value = 0; value <= 4095; value += 100) { 
+    analogWrite(dacPin, value); 
+    delay(10);
+  }
 }
+
+// SQUARE 
+void loop() {
+  analogWrite(dacPin, 0);       
+  delay(500);                   
+  analogWrite(dacPin, 4095);    
+  delay(500);                   
+}
+
 ```
+
 ---
 
 ### Arduino with Web Audio API
@@ -121,7 +151,7 @@ x.set(\freq, 880);
 x.free; // Stop
 ```
 
---# 
+---
 
 ## SuperCollider getting Arduino Data
 

@@ -22,4 +22,4 @@
 
 [intro to microbit](https://raw.githack.com/fbrusch/actam_2024/gh-pages/embeddedprogramming.html) ->[link alla registrazione](https://politecnicomilano.webex.com/webappng/sites/politecnicomilano/recording/bbb0bf42ff144bd6bd8956965029c1b2/playback)
 
-[intro to arduino](https://raw.githack.com/fbrusch/actam_2024/gh-pages/embeddedprogramming2.html) 
+[intro to arduino](https://raw.githack.com/fbrusch/actam_2024/gh-pages/embeddedprogramming2.html) ->[link alla registrazione](https://politecnicomilano.webex.com/webappng/sites/politecnicomilano/recording/f866bfc1ee0a4686a11e0e38400d430b/playback)

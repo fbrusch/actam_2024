@@ -21,3 +21,7 @@
 [webaudio hackathon](https://raw.githack.com/fbrusch/actam_2024/gh-pages/hack2instructions.html)
 
 [intro to microbit](https://raw.githack.com/fbrusch/actam_2024/gh-pages/embeddedprogramming.html) ->[link alla registrazione](https://politecnicomilano.webex.com/webappng/sites/politecnicomilano/recording/bbb0bf42ff144bd6bd8956965029c1b2/playback)
+
+[intro to arduino](https://raw.githack.com/fbrusch/actam_2024/gh-pages/embeddedprogramming2.html) ->[link alla registrazione](https://politecnicomilano.webex.com/webappng/sites/politecnicomilano/recording/f866bfc1ee0a4686a11e0e38400d430b/playback)
+
+[masterclass slides](https://1drv.ms/p/c/4d280c2f32065447/EQVH2Ro1GI1JinkjamqhWU8B6HQJbALql3cM5MHNlziCzw?e=QSiFzy)

@@ -25,3 +25,5 @@
 [intro to arduino](https://raw.githack.com/fbrusch/actam_2024/gh-pages/embeddedprogramming2.html) ->[link alla registrazione](https://politecnicomilano.webex.com/webappng/sites/politecnicomilano/recording/f866bfc1ee0a4686a11e0e38400d430b/playback)
 
 [masterclass slides](https://1drv.ms/p/c/4d280c2f32065447/EQVH2Ro1GI1JinkjamqhWU8B6HQJbALql3cM5MHNlziCzw?e=QSiFzy) ->[link alla registrazione](https://politecnicomilano.webex.com/webappng/sites/politecnicomilano/recording/f3842e69146d4b8298fde2eb250ae379/playback)
+
+[addressing common issues](https://raw.githack.com/fbrusch/actam_2024/gh-pages/corsissues.html)
